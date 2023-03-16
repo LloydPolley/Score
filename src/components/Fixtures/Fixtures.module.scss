@@ -1,0 +1,20 @@
+.subheader {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.table {
+  background-color: #1e1e1e;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.table-selection {
+  border: 2px solid grey;
+  padding: 10px;
+
+  &__active {
+    background-color: rgb(61, 61, 61);
+  }
+}

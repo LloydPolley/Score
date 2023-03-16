@@ -1,0 +1,22 @@
+.selection {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 30px;
+
+  &__item {
+    background-color: #1e1e1e;
+    padding: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 5px;
+  }
+
+  &__active {
+    background-color: #424242;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .nav {
+  }
+}
