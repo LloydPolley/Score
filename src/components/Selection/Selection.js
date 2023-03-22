@@ -3,16 +3,11 @@ import style from "./Selection.module.scss";
 
 const cx = classNames.bind(style);
 
-const selections = [
-  { league: "Premier League", id: 39 },
-  { league: "La Liga", id: 140 },
-];
-
-function Selection({ activeId = 39, setActiveId }) {
+function Selection({ selections, activeId, setActiveId }) {
   return (
     <div className={cx("selection")}>
       {selections?.map((item) => {
-        const { league, id } = item;
+        const { name, id } = item;
         const isActive = activeId === id;
         const handleClick = () => {
           setActiveId(id);
@@ -24,7 +19,7 @@ function Selection({ activeId = 39, setActiveId }) {
             onClick={handleClick}
             key={id}
           >
-            {league}
+            {name}
           </div>
         );
       })}

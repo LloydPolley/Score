@@ -6,22 +6,43 @@ import moment from "moment";
 
 const cx = classNames.bind(style);
 
-function Fixture({ data }) {
+function Fixture({ data, active, team, month, setMonth }) {
   const {
     fixture: { referee, status, venue, date },
     goals,
     teams,
   } = data;
-  console.log("data", data);
-  console.log("date", Date.parse(date));
+
+  const isResult = moment(date).isAfter() && active === "results";
+  const isFixture = moment(date).isBefore() && active === "fixtures";
+  const currentTeamHome = team === teams.home.name;
+  const currentTeamAway = team === teams.away.name;
+
+  if (isFixture || isResult) {
+    return null;
+  }
+
   return (
     <div className={cx("fixture")}>
-      <div>{moment(date).format("Do MMMM  YYYY")}</div>
       <div className={cx("fixture__teams")}>
-        <div className={cx("teams__home")}>{teams.home.name}</div>
-        <div className={cx("teams__away")}>{teams.away.name}</div>
+        <div className={cx("fixture__team-info")}>
+          <img src={teams.home.logo} />
+          <span className={cx(currentTeamHome && "fixture__current")}>
+            {teams.home.name}
+          </span>
+          <span>{goals.home}</span>
+        </div>
+        <div className={cx("fixture__team-info")}>
+          <img src={teams.away.logo} />
+          <span className={cx(currentTeamAway && "fixture__current")}>
+            {teams.away.name}
+          </span>
+          <span>{goals.away}</span>
+        </div>
       </div>
-      <div></div>
+      <div className={cx("fixture__date")}>
+        {moment(date).format("DD-MM-YY")}
+      </div>
     </div>
   );
 }

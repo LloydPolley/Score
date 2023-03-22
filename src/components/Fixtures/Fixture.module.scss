@@ -1,12 +1,48 @@
 .fixture {
+  background-color: #1f1f1f;
+  border-radius: 5px;
+  padding: 20px 10px;
+  display: flex;
+
+  &__current {
+    font-weight: 700;
+    text-decoration: underline;
+    font-size: 18px;
+  }
+
   &__teams {
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    gap: 25px;
+    text-align: left;
+    padding: 10px 30px;
+    width: 55%;
+    // margin: auto 20px;
+    border-right: 1px solid #131313;
+    span {
+      line-height: 30px;
+      // min-width: 50px;
+    }
+    img {
+      width: 30px;
+    }
+  }
+
+  &__team-info {
+    display: flex;
+    vertical-align: middle;
+    justify-content: space-between;
+  }
+  &__score {
+    display: flex;
     text-align: center;
+    margin: auto;
+    padding: 10px;
+  }
+  &__date {
     display: flex;
     margin: auto;
-    width: auto;
-    max-width: 300px;
-    justify-content: space-between;
-    margin-bottom: 20px;
   }
 }
 

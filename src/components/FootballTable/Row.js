@@ -1,8 +1,11 @@
 // import "./App.scss";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Row.scss";
 
 function Row({
+  leagueId,
+  searchId,
   rank,
   logo,
   name,
@@ -16,6 +19,8 @@ function Row({
   goalsDiff,
   form,
 }) {
+  // const urlName = name?.replace(/\s/g, "").toLowerCase();
+
   return (
     <div className="row">
       <div className="row__intro">
@@ -23,7 +28,9 @@ function Row({
         <div className="row__badge">
           <img src={logo} />
         </div>
-        <p className="row__name">{name}</p>
+        <Link to={`/fixtures?id=${searchId}&lid=${leagueId}`}>
+          <p className="row__name">{name}</p>
+        </Link>
       </div>
 
       <div className="row__data">

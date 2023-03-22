@@ -4,7 +4,7 @@
   margin-bottom: 30px;
 
   &__item {
-    background-color: #1e1e1e;
+    background-color: #131313;
     padding: 20px;
     font-weight: 700;
     text-transform: uppercase;
@@ -12,6 +12,7 @@
   }
 
   &__active {
+    transition: 0.2s all;
     background-color: #424242;
   }
 }

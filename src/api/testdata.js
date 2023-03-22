@@ -4460,4 +4460,39 @@ const liverpoolFixtures = {
   ],
 };
 
-export { premierLeague, laLiga, liverpoolFixtures };
+const teamInfo = {
+  get: "teams",
+  parameters: {
+    id: "42",
+  },
+  errors: [],
+  results: 1,
+  paging: {
+    current: 1,
+    total: 1,
+  },
+  response: [
+    {
+      team: {
+        id: 42,
+        name: "Arsenal",
+        code: "ARS",
+        country: "England",
+        founded: 1886,
+        national: false,
+        logo: "https://media-3.api-sports.io/football/teams/42.png",
+      },
+      venue: {
+        id: 494,
+        name: "Emirates Stadium",
+        address: "Queensland Road",
+        city: "London",
+        capacity: 60383,
+        surface: "grass",
+        image: "https://media-3.api-sports.io/football/venues/494.png",
+      },
+    },
+  ],
+};
+
+export { premierLeague, laLiga, liverpoolFixtures, teamInfo };

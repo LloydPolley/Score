@@ -1,45 +1,20 @@
 .nav-container {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: #1e1e1e;
+  background-color: #131313;
 }
 
 .nav {
-  display: flex;
-  // gap: 100px;
   padding: 20px;
   max-width: 1200px;
   margin: auto;
-  justify-content: space-between;
+  color: white;
+  // text-align: center;
 
-  &__name-box {
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-  &__name {
-    font-weight: 700;
-    color: #3f1052;
-  }
-
-  p {
-    margin: 0;
-  }
   a {
     text-decoration: none;
     color: white;
-  }
-
-  &__links {
-    display: flex;
-    gap: 100px;
-    // text-transform: uppercase;
     font-weight: 700;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  .nav {
+    font-size: 25px;
   }
 }

@@ -24,26 +24,43 @@ import Selection from "../Selection/Selection";
 //     return <>error</>;
 //   }
 
+const selections = [
+  { name: "Premier League", id: 39 },
+  { name: "La Liga", id: 140 },
+];
+
 function Table() {
   const [teams, setTeams] = useState([]);
   const [active, setActive] = useState(39);
+  const [logo, setLogo] = useState("");
+  const [leagueName, setLeagueName] = useState("");
 
   const { response } = premierLeague;
+
+  console.log("league", laLiga.response);
 
   useEffect(() => {
     if (active === 39) {
       setTeams(response[0]?.league?.standings[0]);
+      setLogo(response[0]?.league?.logo);
+      setLeagueName(response[0]?.league?.name);
     }
     if (active === 140) {
       setTeams(laLiga?.response[0]?.league?.standings[0]);
+      setLogo(laLiga?.response[0]?.league?.logo);
+      setLeagueName(laLiga?.response[0]?.league?.name);
     }
   }, [active]);
 
   return (
     <>
-      <PageHero title={"Premier League"} />
+      <PageHero logo={logo} name={leagueName} />
       <div className="table">
-        <Selection activeId={active} setActiveId={setActive} />
+        <Selection
+          selections={selections}
+          activeId={active}
+          setActiveId={setActive}
+        />
         <Row
           rank={"#"}
           played={"Pl"}
@@ -60,7 +77,7 @@ function Table() {
           ? teams.map((team) => {
               const {
                 rank,
-                team: { logo, name },
+                team: { logo, name, id },
                 all: {
                   played,
                   win,
@@ -75,6 +92,8 @@ function Table() {
 
               return (
                 <Row
+                  leagueId={active}
+                  searchId={id}
                   key={rank}
                   rank={rank}
                   logo={logo}

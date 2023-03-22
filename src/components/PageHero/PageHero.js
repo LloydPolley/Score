@@ -3,16 +3,19 @@ import style from "./PageHero.module.scss";
 
 const cx = classNames.bind(style);
 
-const selections = [
-  { league: "Premier League", id: 39 },
-  { league: "La Liga", id: 140 },
-];
-
-function PageHero({ title }) {
+function PageHero({ logo, name }) {
   return (
     <>
       <div className={cx("page-hero")}>
-        <h1>{title}</h1>
+        <div className={cx("page-hero__content")}>
+          <div className={cx("page-hero__img-box")}>
+            <img src={logo} />
+          </div>
+          <div className={cx("page-hero__text")}>
+            <p>Competition</p>
+            <h1>{name}</h1>
+          </div>
+        </div>
       </div>
     </>
   );
