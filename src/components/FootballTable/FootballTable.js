@@ -37,8 +37,6 @@ function Table() {
 
   const { response } = premierLeague;
 
-  console.log("league", laLiga.response);
-
   useEffect(() => {
     if (active === 39) {
       setTeams(response[0]?.league?.standings[0]);

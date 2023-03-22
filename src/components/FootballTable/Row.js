@@ -1,5 +1,3 @@
-// import "./App.scss";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Row.scss";
 
@@ -19,8 +17,6 @@ function Row({
   goalsDiff,
   form,
 }) {
-  // const urlName = name?.replace(/\s/g, "").toLowerCase();
-
   return (
     <div className="row">
       <div className="row__intro">

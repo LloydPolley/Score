@@ -1,14 +1,13 @@
 // import "./App.scss";
 import classNames from "classnames/bind";
-import { useLocation, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import fetchFixtures from "../../api/fetchFixtures";
-import {
-  liverpoolFixtures as data,
-  teamInfo as teamData,
-} from "../../api/testdata";
-import Row from "./Fixture";
+// import {
+//   liverpoolFixtures as data,
+//   teamInfo as teamData,
+// } from "../../api/testdata";
 import style from "./Fixtures.module.scss";
 import PageHero from "../PageHero/PageHero";
 import Fixture from "./Fixture";
@@ -19,19 +18,6 @@ import fetchTeam from "../../api/fetchTeam";
 // la liga - 140
 // bundes - 218
 // seria a - 71
-
-// const { data, status } = useQuery("scores", () =>
-//   fetchLeague({ league: 140, season: 2022 })
-// );
-// const { data, status } = useQuery("fixtures", () =>
-//   fetchFixtures({ league: 39, team: 40 })
-// );
-//   if (status === "loading") {
-//     return <>loading</>;
-//   }
-//   if (status === "error") {
-//     return <>error</>;
-//   }
 
 const selections = [
   { name: "Fixtures", id: "fixtures" },
@@ -45,25 +31,25 @@ function Fixtures() {
   const [active, setActive] = useState("fixtures");
   const [month, setMonth] = useState();
 
-  // const { data, status } = useQuery("fixtures", () =>
-  //   fetchFixtures({
-  //     league: searchParams.get("lid"),
-  //     team: searchParams.get("id"),
-  //   })
-  // );
+  const { data, status } = useQuery("fixtures", () =>
+    fetchFixtures({
+      league: searchParams.get("lid"),
+      team: searchParams.get("id"),
+    })
+  );
 
-  // const { data: teamData, status: teamStatus } = useQuery("teams", () =>
-  //   fetchTeam({
-  //     id: searchParams.get("id"),
-  //   })
-  // );
+  const { data: teamData, status: teamStatus } = useQuery("teams", () =>
+    fetchTeam({
+      id: searchParams.get("id"),
+    })
+  );
 
-  // if (status === "loading" || teamStatus === "loading") {
-  //   return <>loading</>;
-  // }
-  // if (status === "error" || teamStatus === "error") {
-  //   return <>error</>;
-  // }
+  if (status === "loading" || teamStatus === "loading") {
+    return <>loading</>;
+  }
+  if (status === "error" || teamStatus === "error") {
+    return <>error</>;
+  }
 
   const { response } = data;
   const { response: responseTeam } = teamData;
