@@ -3,7 +3,7 @@ import cx from "classnames";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import fetchLeague from "../../api/fetchLeague";
-import { laLiga, premierLeague } from "../../api/testdata";
+// import { laLiga, premierLeague } from "../../api/testdata";
 import Row from "./Row";
 import "./FootballTable.scss";
 import PageHero from "../PageHero/PageHero";
@@ -13,16 +13,18 @@ import Selection from "../Selection/Selection";
 // la liga - 140
 // bundes - 218
 // seria a - 71
-
-// const { data, status } = useQuery("scores", () =>
-//   fetchLeague({ league: 140, season: 2022 })
-// );
-//   if (status === "loading") {
-//     return <>loading</>;
+// useEffect(() => {
+//   if (active === 39) {
+//     setTeams(data?.response[0]?.league?.standings[0]);
+//     setLogo();
+//     setLeagueName(response[0]?.league?.name);
 //   }
-//   if (status === "error") {
-//     return <>error</>;
+//   if (active === 140) {
+//     setTeams(laLiga?.response[0]?.league?.standings[0]);
+//     setLogo(laLiga?.response[0]?.league?.logo);
+//     setLeagueName(laLiga?.response[0]?.league?.name);
 //   }
+// }, [active]);
 
 const selections = [
   { name: "Premier League", id: 39 },
@@ -35,24 +37,23 @@ function Table() {
   const [logo, setLogo] = useState("");
   const [leagueName, setLeagueName] = useState("");
 
-  const { response } = premierLeague;
+  const { data, status } = useQuery(`league${active}`, () =>
+    fetchLeague({ league: active, season: 2022 })
+  );
 
-  useEffect(() => {
-    if (active === 39) {
-      setTeams(response[0]?.league?.standings[0]);
-      setLogo(response[0]?.league?.logo);
-      setLeagueName(response[0]?.league?.name);
-    }
-    if (active === 140) {
-      setTeams(laLiga?.response[0]?.league?.standings[0]);
-      setLogo(laLiga?.response[0]?.league?.logo);
-      setLeagueName(laLiga?.response[0]?.league?.name);
-    }
-  }, [active]);
+  if (status === "loading") {
+    return <>loading</>;
+  }
+  if (status === "error") {
+    return <>error</>;
+  }
 
   return (
     <>
-      <PageHero logo={logo} name={leagueName} />
+      <PageHero
+        logo={data?.response[0]?.league?.logo}
+        name={data?.response[0]?.league?.name}
+      />
       <div className="table">
         <Selection
           selections={selections}
@@ -71,8 +72,8 @@ function Table() {
           goalsDiff={"GD"}
           form={"Form"}
         />
-        {teams?.length
-          ? teams.map((team) => {
+        {data?.response[0]?.league?.standings[0]?.length
+          ? data?.response[0]?.league?.standings[0].map((team) => {
               const {
                 rank,
                 team: { logo, name, id },

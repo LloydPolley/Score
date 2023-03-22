@@ -31,11 +31,14 @@ function Fixtures() {
   const [active, setActive] = useState("fixtures");
   const [month, setMonth] = useState();
 
-  const { data, status } = useQuery("fixtures", () =>
-    fetchFixtures({
-      league: searchParams.get("lid"),
-      team: searchParams.get("id"),
-    })
+  const { data, status } = useQuery(
+    "fixtures",
+    () =>
+      fetchFixtures({
+        league: searchParams.get("lid"),
+        team: searchParams.get("id"),
+      }),
+    { staleTime: Infinity }
   );
 
   const { data: teamData, status: teamStatus } = useQuery("teams", () =>
